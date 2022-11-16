@@ -2,6 +2,7 @@
 
 int main(void)
 {
+	Form form;
 	Bureaucrat michel("michel", 1);
 	Bureaucrat patrick("Patrick", 150);
 	try
@@ -12,6 +13,14 @@ int main(void)
 		patrick.upgrade();
 		std::cout << michel << std::endl;
 		std::cout << patrick << std::endl;
+
+		form.beSigned(patrick);
+		std::cout << std::endl;
+		patrick.signForm(form);
+		std::cout << std::endl << form << std::endl << std::endl;
+		form.beSigned(michel);
+		michel.signForm(form);
+		std::cout << std::endl << form << std::endl << std::endl;
 
 		Bureaucrat unknown("unknown", 234);
 	}

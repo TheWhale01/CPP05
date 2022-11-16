@@ -1,13 +1,16 @@
 #pragma once
-
 #include "Bureaucrat.hpp"
+#include <iostream>
+#include <stdexcept>
+
+class Bureaucrat;
 
 class Form
 {
 	public:
 		Form(void);
 		Form(Form const &rhs);
-		Form(int x_grade, int s_grade);
+		Form(int x_grade, int s_grade, std::string const &name);
 		~Form(void);
 
 		Form &operator=(Form const &rhs);

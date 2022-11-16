@@ -27,15 +27,7 @@ Bureaucrat::~Bureaucrat(void)
 	return ;
 }
 
-const char *Bureaucrat::GradeTooHighException::what(void) const throw()
-{
-	return ("Grade too high");
-}
-
-const char *Bureaucrat::GradeTooLowException::what(void) const throw()
-{
-	return ("Grade too low");
-}
+/* Operator overloads */
 
 Bureaucrat &Bureaucrat::operator=(Bureaucrat const &rhs)
 {
@@ -44,6 +36,14 @@ Bureaucrat &Bureaucrat::operator=(Bureaucrat const &rhs)
 	this->_grade = rhs._grade;
 	return (*this);
 }
+
+std::ostream &operator<<(std::ostream &stream, Bureaucrat const &bureaucrat)
+{
+	stream << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << ".";
+	return (stream); 
+}
+
+/* Member functions */
 
 int const &Bureaucrat::getGrade(void) const
 {
@@ -85,8 +85,29 @@ void Bureaucrat::downgrade(void)
 	}
 }
 
-std::ostream &operator<<(std::ostream &stream, Bureaucrat const &bureaucrat)
+void Bureaucrat::signForm(Form const &form) const
 {
-	stream << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << ".";
-	return (stream); 
+	try
+	{
+		if (form.getSign() == false && this->_grade > form.getSignGrade())
+			throw (Form::GradeTooLowException());
+		else
+			std::cout << this->_name << " signed " << form.getName() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << this->_name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+	}
+}
+
+/* Exceptions */
+
+const char *Bureaucrat::GradeTooHighException::what(void) const throw()
+{
+	return ("Grade too high");
+}
+
+const char *Bureaucrat::GradeTooLowException::what(void) const throw()
+{
+	return ("Grade too low");
 }

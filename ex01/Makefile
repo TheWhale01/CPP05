@@ -1,10 +1,10 @@
 CC=c++
-NAME=bureaucrat
+NAME=form
 OBJ_DIR=obj/
 SRC_DIR=src/
 INCLUDES=includes/
 CFLAGS=-Wall -Wextra -Werror -I $(INCLUDES) -g -std=c++98
-CFILES=$(addprefix $(SRC_DIR), main.cpp Bureaucrat.cpp)
+CFILES=$(addprefix $(SRC_DIR), main.cpp Form.cpp Bureaucrat.cpp)
 OBJS=$(patsubst $(SRC_DIR)%.cpp, $(OBJ_DIR)%.o, $(CFILES))
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp

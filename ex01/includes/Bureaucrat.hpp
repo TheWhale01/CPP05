@@ -1,6 +1,9 @@
 #pragma once
+#include "Form.hpp"
 #include <iostream>
 #include <stdexcept>
+
+class Form;
 
 class Bureaucrat
 {
@@ -16,7 +19,7 @@ class Bureaucrat
 
 		void upgrade(void);
 		void downgrade(void);
-		void SignForm(void) const;
+		void signForm(Form const &form) const;
 
 		std::string const &getName(void) const;
 
