@@ -70,17 +70,9 @@ std::string const &Form::getName(void) const
 
 void Form::beSigned(Bureaucrat const &bureaucrat)
 {
-	try
-	{
-		if (bureaucrat.getGrade() > this->_s_grade)
-			throw (Form::GradeTooLowException());
-		else
-			this->_sign = true;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
+	if (bureaucrat.getGrade() > this->_s_grade)
+		throw (Form::GradeTooLowException());
+	this->_sign = true;
 }
 
 /* Exceptions */
