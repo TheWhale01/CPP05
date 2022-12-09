@@ -83,13 +83,18 @@ void AForm::beSigned(Bureaucrat const &bureaucrat)
 	{
 		if (bureaucrat.getGrade() > this->_s_grade)
 			throw (AForm::GradeTooLowException());
-		else
-			this->_sign = true;
+		this->_sign = true;
 	}
-	catch(const std::exception& e)
+	catch (std::exception const &e)
 	{
-		std::cerr << e.what() << std::endl;
+		std::cerr << "Could not sign form: " << e.what() << std::endl;
 	}
+}
+
+void AForm::execute(Bureaucrat const &executor) const
+{
+	this->checkGrade(executor);
+	this->useForm();
 }
 
 /* Exceptions */

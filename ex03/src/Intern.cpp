@@ -56,11 +56,8 @@ AForm *Intern::makeForm(std::string const &name, std::string const &target)
 	{
 		if (i == 3)
 			throw (Intern::FormDoesNotExistException());
-		else
-		{
-			std::cout << "Intern creates " << name << std::endl;
-			return ((this->*tab[i])(target));
-		}
+		std::cout << "Intern creates " << name << std::endl;
+		return ((this->*tab[i])(target));
 	}
 	catch(const std::exception& e)
 	{

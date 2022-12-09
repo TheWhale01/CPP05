@@ -57,23 +57,44 @@ std::string const &Bureaucrat::getName(void) const
 
 void Bureaucrat::upgrade(void)
 {
-	if (this->_grade == 1)
-		throw Bureaucrat::GradeTooHighException();
-	this->_grade--;
+	try
+	{
+		if (this->_grade == 1)
+			throw Bureaucrat::GradeTooHighException();
+		this->_grade--;
+	}
+	catch (std::exception const &e)
+	{
+		std::cerr << "Could not upgrade: " << e.what() << std::endl;
+	}
 }
 
 void Bureaucrat::downgrade(void)
 {
-	if (this->_grade == 150)
-		throw Bureaucrat::GradeTooLowException();
-	this->_grade++;
+	try
+	{
+		if (this->_grade == 150)
+			throw Bureaucrat::GradeTooLowException();
+		this->_grade++;
+	}
+	catch (std::exception const &e)
+	{
+		std::cerr << "Could not downgrade: " << e.what() << std::endl;
+	}
 }
 
 void Bureaucrat::signForm(Form const &form) const
 {
-	if (form.getSign() == false && this->_grade > form.getSignGrade())
-		throw (Form::GradeTooLowException());
-	std::cout << this->_name << " signed " << form.getName() << std::endl;
+	try
+	{
+		if (this->_grade > form.getSignGrade())
+			throw (Form::GradeTooLowException());
+		std::cout << this->_name << " signed " << form.getName() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << this->_name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+	}
 }
 
 /* Exceptions */

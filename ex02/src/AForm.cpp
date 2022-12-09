@@ -34,7 +34,6 @@ AForm &AForm::operator=(AForm const &rhs)
 	if (this == &rhs)
 		return (*this);
 	this->_sign = rhs._sign;
-	this->target = rhs.target;
 	return (*this);
 }
 
@@ -79,9 +78,22 @@ std::string const &AForm::getName(void) const
 
 void AForm::beSigned(Bureaucrat const &bureaucrat)
 {
-	if (bureaucrat.getGrade() > this->_s_grade)
-		throw (AForm::GradeTooLowException());
-	this->_sign = true;
+	try
+	{
+		if (bureaucrat.getGrade() > this->_s_grade)
+			throw (AForm::GradeTooLowException());
+		this->_sign = true;
+	}
+	catch (std::exception const &e)
+	{
+		std::cerr << "Could not sign form: " << e.what() << std::endl;
+	}
+}
+
+void AForm::execute(Bureaucrat const &executor) const
+{
+	this->checkGrade(executor);
+	this->useForm();
 }
 
 /* Exceptions */

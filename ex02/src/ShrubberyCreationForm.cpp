@@ -2,18 +2,20 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm(void): AForm(137, 145, "Shrubbery Form")
 {
-	this->target = "default_shrubbery";
+	this->_target = "default_shrubbery";
 	return ;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const &target): AForm(137, 145, "Shrubbery Form")
 {
-	this->target = target + "_shrubbery";
+	this->_target = target + "_shrubbery";
+	return ;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &rhs)
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &rhs): AForm(rhs)
 {
 	*this = rhs;
+	return ;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void)
@@ -25,18 +27,19 @@ ShrubberyCreationForm::~ShrubberyCreationForm(void)
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm const &rhs)
 {
-	(void)rhs;
+	if (this == &rhs)
+		return (*this);
+	this->_target = rhs._target;
 	return (*this);	
 }
 
 /* MEMBERS FUNCTIONS */
 
-void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
+void ShrubberyCreationForm::useForm(void) const
 {
 	std::ofstream outfile;
 
-	this->checkGrade(executor);
-	outfile.open(this->target.c_str());
+	outfile.open(this->_target.c_str());
 	if (!outfile.good())
 		throw (ShrubberyCreationForm::AForm::FileNotOpenedException());
 	outfile << "              v .   ._, |_  .," << std::endl;
@@ -46,7 +49,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
     outfile << "       \'7-,--.\'._||  / / ," << std::endl;
     outfile << "       /\'     \'-.\'./ / |/_.\'" << std::endl;
     outfile << "                 |    |//" << std::endl;
-    outfile << "                 |_    /   " << this->target << std::endl;
+    outfile << "                 |_    /   " << this->_target << std::endl;
     outfile << "                 |-   |" << std::endl;
     outfile << "                 |   =|" << std::endl;
     outfile << "                 |    |" << std::endl;

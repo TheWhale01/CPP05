@@ -24,7 +24,8 @@ class AForm
 		void beSigned(Bureaucrat const &bureaucrat);
 		void checkGrade(Bureaucrat const &bureaucrat) const;
 
-		virtual void execute(Bureaucrat const &executor) const = 0;
+		void execute(Bureaucrat const &executor) const;
+		virtual void useForm(void) const = 0;
 	
 		std::string const &getName(void) const;
 

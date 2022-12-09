@@ -32,11 +32,11 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &r
 
 /* MEMBER FUNCTIONS */
 
-void RobotomyRequestForm::execute(Bureaucrat const &executor) const
+void RobotomyRequestForm::useForm(void) const
 {
 	int nb;
 
-	this->checkGrade(executor);
+	srand(time(NULL));
 	std::cout << "*rizZzzz BzzZz rZz*" << std::endl;
 	nb = rand();
 	if (nb % 2)

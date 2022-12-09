@@ -33,11 +33,10 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm co
 
 /* MEMBERS FUNCTIONS */
 
-void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
+void ShrubberyCreationForm::useForm(void) const
 {
 	std::ofstream outfile;
 
-	this->checkGrade(executor);
 	outfile.open(this->target.c_str());
 	if (!outfile.good())
 		throw (ShrubberyCreationForm::AForm::FileNotOpenedException());

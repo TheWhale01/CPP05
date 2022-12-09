@@ -12,7 +12,7 @@ class AForm
 		AForm(void);
 		AForm(AForm const &rhs);
 		AForm(int x_grade, int s_grade, std::string const &name);
-		~AForm(void);
+		virtual ~AForm(void);
 
 		AForm &operator=(AForm const &rhs);
 
@@ -24,7 +24,8 @@ class AForm
 		void beSigned(Bureaucrat const &bureaucrat);
 		void checkGrade(Bureaucrat const &bureaucrat) const;
 
-		virtual void execute(Bureaucrat const &executor) const = 0;
+		void execute(Bureaucrat const &executor) const;
+		virtual void useForm(void) const = 0;
 	
 		std::string const &getName(void) const;
 
@@ -57,9 +58,6 @@ class AForm
 			public:
 				virtual const char *what(void) const throw();
 		};
-
-	protected:
-		std::string target;
 
 	private:
 		int const _s_grade;

@@ -1,4 +1,4 @@
-#include "RobotmyRequestForm.hpp"
+#include "RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(void): AForm(45, 72, "default")
 {
@@ -7,7 +7,7 @@ RobotomyRequestForm::RobotomyRequestForm(void): AForm(45, 72, "default")
 
 RobotomyRequestForm::RobotomyRequestForm(std::string const &target): AForm(45, 72, "Robot Form")
 {
-	this->target = target;
+	this->_target = target;
 	return ;
 }
 
@@ -26,21 +26,23 @@ RobotomyRequestForm::~RobotomyRequestForm(void)
 
 RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &rhs)
 {
-	(void)rhs;
+	if (this == &rhs)
+		return (*this);
+	this->_target = rhs._target;
 	return (*this);
 }
 
 /* MEMBER FUNCTIONS */
 
-void RobotomyRequestForm::execute(Bureaucrat const &executor) const
+void RobotomyRequestForm::useForm(void) const
 {
 	int nb;
 
-	this->checkGrade(executor);
+	srand(time(NULL));
 	std::cout << "*rizZzzz BzzZz rZz*" << std::endl;
 	nb = rand();
 	if (nb % 2)
-		std::cout << this->target << " has been robotomized." << std::endl;
+		std::cout << this->_target << " has been robotomized." << std::endl;
 	else
-		std::cout << this->target << " has not been robotomized." << std::endl;
+		std::cout << this->_target << " has not been robotomized." << std::endl;
 }

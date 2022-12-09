@@ -2,19 +2,19 @@
 
 PresidentialPardonForm::PresidentialPardonForm(void): AForm(5, 25, "Presidential Form")
 {
-	this->target = "President";
+	this->_target = "President";
 	return ;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(std::string const &target): AForm(5, 25, "Presidential Form")
 {
-	this->target = target;
+	this->_target = target;
 	return ;
 }
 
 PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &rhs): AForm(rhs)
 {
-	this->target = rhs.target;
+	this->_target = rhs._target;
 	*this = rhs;
 	return ;
 }
@@ -34,8 +34,7 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(PresidentialPardonForm
 
 /* MEMBER FUNCTIONS */
 
-void PresidentialPardonForm::execute(Bureaucrat const &executor) const
+void PresidentialPardonForm::useForm(void) const
 {
-	this->checkGrade(executor);
-	std::cout << this->target << " had been pardon by Zaphod Beeblebrox." << std::endl;
+	std::cout << this->_target << " had been pardon by Zaphod Beeblebrox." << std::endl;
 }
